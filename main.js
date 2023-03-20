@@ -57,13 +57,13 @@ document.addEventListener(RENDER_EVENT, function (){
 
 function makeBook (BookObject) {
     const bookTitle = document.createElement('h2');
-    bookTitle.innerText = bookObject.title;
+    bookTitle.innerText = BookObject.title;
 
     const bookAuthor = document.createElement('p');
     bookAuthor.innerText = 'Penulis : ' + BookObject.author;
 
     const bookYear = document.createElement('p');
-    bookyear.innerText = 'Tahun : '+ BookObject.year ;
+    bookYear.innerText = 'Tahun : '+ BookObject.year ;
 
     const buttonContainer = document.createElement('div');
     buttonContainer.classList.add('action');
@@ -113,18 +113,18 @@ function makeBook (BookObject) {
 }
 
 document.addEventListener(RENDER_EVENT, function () {
-    const incompleteBookshelfList = document.getElementById('books');
+    const incompleteBookshelfList = document.getElementById('incompleteBookshelfList');
     incompleteBookshelfList.innerHTML = '';
   
-  const completeBookshelfList = document.getElementById('completed-books');
+  const completeBookshelfList = document.getElementById('completeBookshelfList');
     completeBookshelfList.innerHTML = '';
 
-    for (const bookItem of Books) {
+    for (const bookItem of books) {
         const bookElement = makeBook(bookItem);
         if(!bookItem.isCompleted)
-        incompleteBookShelfList.append(bookElement);
+        incompleteBookshelfList.append(bookElement);
         else
-        completeBookShelfList.append(bookElement);
+        completeBookshelfList.append(bookElement);
     }
 });
 
