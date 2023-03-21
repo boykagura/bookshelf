@@ -70,7 +70,7 @@ function makeBook (BookObject) {
 
     const Container = document.createElement('div');
     Container.classList.add('book_item');
-    Container.append(buttonContainer);
+    Container.append(buttonContainer, bookTitle, bookAuthor, bookYear);
     Container.setAttribute('id', `book-${BookObject.id}`);
 
     if (BookObject.isCompleted) {
@@ -90,7 +90,7 @@ function makeBook (BookObject) {
 
             removeBookFromCompleted(BookObject.id);
         });
-        Container.append(undoButton, trashButton);
+        buttonContainer.append(undoButton, trashButton);
     }
 
     else {
@@ -106,7 +106,7 @@ function makeBook (BookObject) {
             removeBookFromCompleted(BookObject.id);
 
         });
-        Container.append(undoButton, trashButton);
+        buttonContainer.append(undoButton, trashButton);
     }
     return Container;
 
