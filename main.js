@@ -68,11 +68,6 @@ function makeBook (BookObject) {
     const buttonContainer = document.createElement('div');
     buttonContainer.classList.add('action');
 
-    const trashButton = document.createElement('button');
-  trashButton.classList.add('red');
-  trashButton.innerText = 'Hapus';
-  trashButton.setAttribute('id', 'button-delete');
-
   const Container = document.createElement('article');
   Container.classList.add('book_item');
   Container.append(bookTitle, bookAuthor, bookYear, buttonContainer);
@@ -89,29 +84,35 @@ function makeBook (BookObject) {
         });
 
         const trashButton = document.createElement('button');
-        trashButton.classList.add("trash-button");
-
-        trashButton.addEventListener ('click', function (){
-
-            removeBookFromCompleted(BookObject.id);
+        trashButton.classList.add('red');
+        trashButton.innerText = 'Hapus';
+        trashButton.setAttribute('id', 'button-delete');
+        trashButton.addEventListener("click", function () {
+          removeBookFromCompleted(BookObject.id);
         });
+
         buttonContainer.append(undoButton, trashButton);
     }
 
     else {
-        const undoButton = document.createElement ('button');
-        undoButton.classList.add('undo-button');
-        undoButton.addEventListener('click', function(){
-            addBookToCompleted(BookObject.id);
-        });
+        const undoButton = document.createElement('button');
+        undoButton.classList.add('green');
+        undoButton.setAttribute('id', 'button-undo');
+        undoButton.innerText = 'Selesai dibaca';
 
-        const trashButton = document.createElement ('button');
-        trashButton.classList.add('trash-button');
-        trashButton.addEventListener('click', function(){
-            removeBookFromCompleted(BookObject.id);
-
+        undoButton.addEventListener('click', function (){
+            undoBookFromCompleted(BookObject.id);
         });
-        buttonContainer.append(undoButton, trashButton);
+        
+
+        const trashButton = document.createElement('button');
+        trashButton.classList.add('red');
+        trashButton.innerText = 'Hapus';
+        trashButton.setAttribute('id', 'button-delete');
+        trashButton.addEventListener('click', function() {
+            removeBookFromCompleted(BookObject.id);    
+        });
+        buttonContainer.append(undoButton,trashButton);
     }
     return Container;
 
