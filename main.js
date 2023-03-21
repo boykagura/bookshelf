@@ -56,7 +56,7 @@ document.addEventListener(RENDER_EVENT, function (){
 });
 
 function makeBook (BookObject) {
-    const bookTitle = document.createElement('h2');
+    const bookTitle = document.createElement('h3');
     bookTitle.innerText = BookObject.title;
 
     const bookAuthor = document.createElement('p');
@@ -68,10 +68,15 @@ function makeBook (BookObject) {
     const buttonContainer = document.createElement('div');
     buttonContainer.classList.add('action');
 
-    const Container = document.createElement('div');
-    Container.classList.add('book_item');
-    Container.append(buttonContainer, bookTitle, bookAuthor, bookYear);
-    Container.setAttribute('id', `book-${BookObject.id}`);
+    const trashButton = document.createElement('button');
+  trashButton.classList.add('red');
+  trashButton.innerText = 'Hapus';
+  trashButton.setAttribute('id', 'button-delete');
+
+  const Container = document.createElement('article');
+  Container.classList.add('book_item');
+  Container.append(bookTitle, bookAuthor, bookYear, buttonContainer);
+  Container.setAttribute('id', `book-${BookObject.id}`);
 
     if (BookObject.isCompleted) {
         const undoButton = document.createElement('button');
@@ -80,7 +85,7 @@ function makeBook (BookObject) {
         undoButton.innerText = 'Belum selesai dibaca';
 
         undoButton.addEventListener('click', function (){
-            undoBookFromCompleted(id);
+            undoBookFromCompleted(BookObject.id);
         });
 
         const trashButton = document.createElement('button');
@@ -147,7 +152,7 @@ function findBook(bookId){
 }
 
 function removeBookFromCompleted(bookId){
-    const bookTarget = findBookIndex(bookId);
+    const bookTarget = findBook(bookId);
 
     if(bookTarget === -1) return;
 
@@ -218,7 +223,7 @@ function removeBookFromCompleted(bookId){
         const searchBook = document.getElementById('searchBookTitle').value.toLowerCase();
         const bookList = document.querySelectorAll('.item > .inner h2');
 
-        for (const book of booklist ){
+        for (const book of bookList ){
             if(searchBook !== book.innerText.toLowerCase()){
                 book.parentElement.style.display = 'block';
             }
